@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.c2t.annotation.basic.Employee;
+import com.c2t.annotation.basic.Employee2;
 import com.c2t.annotation.basic.EmployeeList;
 import com.journaldev.spring.Service.EmployeeService;
 
@@ -93,4 +94,30 @@ public class EmployeeController {
 		return "deleted successfully";
 	
 }
+	@RequestMapping(value="/rest/emp/dummy/insert",method = RequestMethod.GET)
+	public @ResponseBody Employee insertEmployee()
+	{
+		Employee e=new Employee();
+		e.setFirstname("hello");
+		e.setLastname("dear..");
+		e.setBirthDate(new Date(1982/3/4));
+		e.setCellphone("12345");
+		e.setId(2l);
+		
+		Employee2 e2=new Employee2();
+		e2.setFirstname("hello2");
+		e2.setLastname("dear..2");
+		e2.setBirthDate(new Date(1982/3/4));
+		e2.setCellphone("12345888");
+		e2.setId(2l);
+		
+		Session session=sf.openSession();
+		session.beginTransaction();
+		session.save(e);
+		session.save(e2);
+		session.getTransaction().commit();
+		return e;
+	}
+	
+	
 }
